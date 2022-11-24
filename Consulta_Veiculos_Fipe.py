@@ -38,5 +38,5 @@ if __name__ == '__main__':
         print(veiculo['codigo'])
         print(veiculo['nome'])
         print('_________________')
-   
+        print('_________________')
 
