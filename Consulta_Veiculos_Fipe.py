@@ -16,8 +16,8 @@ def lista_marcas():
         print(f'Marca: {marca["nome"].capitalize()}')
         print('*' * 30) 
 
-def get_veiculos(ID_MARCASELECIONADA):
-    url = f'https://parallelum.com.br/fipe/api/v1/carros/marcas/{ID_MARCASELECIONADA}/modelos'
+def get_veiculos(id_marcaseleciconada):
+    url = f'https://parallelum.com.br/fipe/api/v1/carros/marcas/{id_marcaseleciconada}/modelos'
     headers = {'user-agent': 'MyStudyApp'}
     
     resposta = requests.get(url, headers=headers)
@@ -28,13 +28,13 @@ def get_veiculos(ID_MARCASELECIONADA):
 
 
 class Fipe():
-    def __init__(self, ID_MARCASELECIONADA):
-        self.ID_MARCASELECIONADA = ID_MARCASELECIONADA
+    def __init__(self, id_marcaseleciconada):
+        self.id_marcaseleciconada = id_marcaseleciconada
         self.indice = 0
         self.modelos = []
     
     def __iter__(self):
-        self.modelos = get_veiculos(self.ID_MARCASELECIONADA)
+        self.modelos = get_veiculos(self.id_marcaseleciconada)
         return self 
 
     def __next__(self):
@@ -48,11 +48,17 @@ class Fipe():
 
 if __name__ == '__main__':
     lista_marcas()
-    ID_MARCASELECIONADA = 1
-    lista_fipe = Fipe(ID_MARCASELECIONADA)   
+    id_marcaseleciconada = ' '
+    while id_marcaseleciconada == ' ':
+        try:
+            id_marcaseleciconada = int(input('DIGITE O CÓDIGO DA MARCA PARA COSULTAR OS MODELOS: '))
+        except ValueError:
+            print('VALOR INVÁLIDO')
+        
+    lista_fipe = Fipe(id_marcaseleciconada)   
     for veiculo in lista_fipe:
-        print(veiculo['codigo'])
-        print(veiculo['nome'])
+        print(f'Código do Veículo: {veiculo["codigo"]}')
+        print(f'Nome do Veículo: {veiculo["nome"]}')
         print('_________________')
         print('_________________')
 
