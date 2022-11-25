@@ -57,8 +57,8 @@ if __name__ == '__main__':
         
     lista_fipe = Fipe(id_marcaseleciconada)   
     for veiculo in lista_fipe:
-        print(veiculo['codigo'])
-        print(veiculo['nome'])
+        print(f'Código do Veículo: {veiculo["codigo"]}')
+        print(f'Nome do Veículo: {veiculo["nome"]}')
         print('_________________')
         print('_________________')
 
