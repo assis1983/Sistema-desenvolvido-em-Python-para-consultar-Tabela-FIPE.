@@ -1,5 +1,20 @@
 import requests
- 
+
+def lista_marcas():
+
+    url = f'https://parallelum.com.br/fipe/api/v1/carros/marcas'
+    headers = {'user-agent': 'MyStudyApp'}
+
+    resposta = requests.get(url, headers=headers)
+    
+    resposta_json = resposta.json()
+    lista = resposta_json
+    itlista = iter(lista)
+    
+    for marca in itlista:
+        print(f'Código: {marca["codigo"].capitalize()}')
+        print(f'Marca: {marca["nome"].capitalize()}')
+        print('*' * 30) 
 
 def get_veiculos(ID_MARCASELECIONADA):
     url = f'https://parallelum.com.br/fipe/api/v1/carros/marcas/{ID_MARCASELECIONADA}/modelos'
@@ -32,11 +47,12 @@ class Fipe():
 
 
 if __name__ == '__main__':
+    lista_marcas()
     ID_MARCASELECIONADA = 1
     lista_fipe = Fipe(ID_MARCASELECIONADA)   
     for veiculo in lista_fipe:
         print(veiculo['codigo'])
         print(veiculo['nome'])
         print('_________________')
-   
+        print('_________________')
 
